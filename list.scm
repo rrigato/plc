@@ -14,3 +14,11 @@
 ; defining a function
 (define (squareIt x)
   (* x x))
+
+(squareIt 3)
+(squareIt 23)
+
+(define (sum_of_squares x y)
+  ( + (squareIt x) (squareIt y))
+  )
+(sum_of_squares 3 4)
