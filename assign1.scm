@@ -19,3 +19,22 @@
       (let ((temp (lmr xs)))
         (append (car(cdr(temp))) selection-sort(cdr(xs))))))
 (selection-sort '(a b c))
+
+
+
+;(define(make-random-sequence size min-value max-value)
+ ; (let temp([ inexact->exact  (floor (* (random)  (+ max-value 1)))])
+  ;     (if (< size 1) '()
+   ; (list temp (make-random-sequence (- size 1) min-value max-value)))))
+    
+
+
+;(make-random-sequence 3 0 10)
+
+
+(define (make-random-sequence2 size min-value max-value)
+  (let([temp (inexact->exact  (floor (* (random)  (+ max-value 1))))])
+    (cond((< size 1) temp)
+         
+     (else (cons temp (make-random-sequence2 (- size 1) min-value max-value)  )))))
+(make-random-sequence2 5 5 10)
