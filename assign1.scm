@@ -38,3 +38,17 @@
          
      (else (cons temp (make-random-sequence2 (- size 1) min-value max-value)  )))))
 (make-random-sequence2 5 5 10)
+
+
+( define (power f n )
+   
+   (if (= n 0) (f)
+       (lambda (x)
+    ( (power f (- n 1)) (f x) ))))
+
+
+
+
+(define (g x)  ((power list 3) x))
+
+(g 'a)
