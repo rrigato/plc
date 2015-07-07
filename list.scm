@@ -60,3 +60,14 @@ mylist3
 
 (cdr (cdr ( cdr mylist3)))
 (car(cdr mylist3))
+
+
+(define (insert-helper u left right)
+
+  (cond
+
+    ((or (empty? right)(>= (head right) u))  (append left (cons u right)))
+
+    (else
+
+     (insert-helper u ( append left (list(head right))) (tail right)  ))  ))
