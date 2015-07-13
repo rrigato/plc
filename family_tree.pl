@@ -40,7 +40,9 @@ father(rudy, randy).
 sibling(X,Y) :- parent(Z,X) , parent(Z,Y) , X\=Y.
 parent(X,Y) :- mother(X,Y).
 parent(X,Y) :- father(X,Y).
-grandparent(X,Y) :- parent(X,Z) , parent(Z,Y).
+ancestor(X,Y) :- parent(X,Z) , parent(Z,Y).
 cousin(X,Y) :- grandparent(Z,X) , grandparent(Z,Y) , X\=Y.
 uncle(X,Y) :-  cousin(Y,Z) , parent(X,Z), male(X).
 aunt(X,Y) :- cousin(Y,Z) , parent(X,Z) , female(X).
+descendant(X,Y) :- ancestor(Y,X).
+common_ancestor(X,Y,Z) :-  ancestor(Z,Y), ancestor(Z,X).
