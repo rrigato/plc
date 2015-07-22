@@ -30,23 +30,23 @@ public class Point {
 // return y
 }
 
-public double getMaxX() {
+static public double getMaxX() {
 	
 		return maxX;
 		// return maxX
 }
 	
-	public double getMaxY() {
+static	public double getMaxY() {
 // return maxY
 		return maxY;
 }
 
-public double getMinX() {
+static public double getMinX() {
 		// return minX
 		return minX;
 }
 	
-	public double getMinY() {
+static	public double getMinY() {
 // return minY
 		return minY;
 }
@@ -136,8 +136,14 @@ public int getQuadrant() {
 		// First check if o isn’t null or of a different class as this (use getClass()).
 		// Then create a temp of type Point and assign o to it (via a cast).
 		// Now check that temp and this have the same values for x and y.
-		if(o == null || getClass(o) != getClass(this))
-			return false;
+		if(o != null &&  o.getClass() == this.getClass())
+			{
+			Point temp;		
+			temp = (Point) o;
+			if (temp.x == this.x && temp.y == this.y)
+				return true;	
+			}
+		return false;
 		
 	}
 
