@@ -104,8 +104,6 @@ public class ComplexFraction extends Number {
 }
 
 
-
-
 package calculator2;
 
 public class Fraction extends Number {
@@ -122,6 +120,8 @@ public class Fraction extends Number {
 	}
 	
 	public Fraction(int numerator) {
+		this.numerator = numerator;
+		this.denominator = 1;
 		// FILL IN CODE HERE
 	}
 	
@@ -144,7 +144,15 @@ public class Fraction extends Number {
 	public Number add(Number n) {
 		if (n instanceof Fraction) {
 			Fraction temp  = (Fraction) n;
-			return new Fraction(temp.getNumerator() / temp.getDenominator() + this.getNumerator() / temp.getDenominator());
+			if (temp.getDenominator() == this.getDenominator())
+				return new Fraction(temp.getNumerator() + this.getNumerator(), temp.getDenominator());
+			else
+			{
+				int denom = gcd(temp.getDenominator(),this.getDenominator());
+				int val1 = denom/ temp.getDenominator();
+				int val2 = denom/ this.getDenominator();
+				return new Fraction(temp.getNumerator()*val1 + this.getNumerator()*val2, denom);
+			}
 			// FILL IN CODE HERE
 		}
 		return Plus.getInstance().operate(this,n);  // delegate type conversion to Operator classes 
@@ -165,7 +173,7 @@ public class Fraction extends Number {
 	public Number multiply(Number n) {
 		if (n instanceof Fraction) {
 			Fraction temp = (Fraction) n;
-			return new Fraction((temp.getNumerator() * this.getNumerator()) / (temp.getDenominator() * this.getDenominator()));
+			return new Fraction((temp.getNumerator() * this.getNumerator()), (temp.getDenominator() * this.getDenominator()));
 			// FILL IN CODE HERE
 		}
 		return Times.getInstance().operate(this,n);  // delegate type conversion
