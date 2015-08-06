@@ -32,8 +32,12 @@ bool isPal (string test)
 		char letter = test[0];
 		return isLetter(letter);
 	}
-	else if (test[0] == test[test.length() - 1])
+	else if ((test[0] == test[test.length() - 1]) )
 	{
+		char temp1 = test[0];
+		char temp2 = test[test.length() -1];
+		if (!isLetter(temp1) || !isLetter(temp2) )
+			return false;
 		string temp;
 
 		temp = test.substr(1,(test.length() -2));
@@ -49,7 +53,7 @@ bool isPal (string test)
 
 bool isLetter(char test)
 {
-	if ((test >97) && (test <122))
+	if ((test >=97) && (test <=122))
 			return true;
 	return false;
 }
