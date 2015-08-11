@@ -25,7 +25,7 @@ static boolean value(String s) {
 return false;
 }
 static boolean digit(char c) {
-return false;
+	return c >=49 && c <= 57;
 }
 static boolean letter(char c) {
  		
@@ -41,28 +41,29 @@ return false;
 static boolean variableTail(String s) {
 return false;
 }
+
 static String addSpaces(String s) {
 // nothing to add here
-if (s.length() <= 1) return s;
-String first = s.substring(0, 1);
-char c = s.charAt(0), d = s.charAt(1);
-boolean addSpace = !(c==' ' || d==' ' || (c=='-' && digit(d)) || varChar(c) && varChar(d));
-if (addSpace) first += " ";
-return first + addSpaces(s.substring(1));
+	if (s.length() <= 1) return s;
+	String first = s.substring(0, 1);
+	char c = s.charAt(0), d = s.charAt(1);
+	boolean addSpace = !(c==' ' || d==' ' || (c=='-' && digit(d)) || varChar(c) && varChar(d));
+	if (addSpace) first += " ";
+	return first + addSpaces(s.substring(1));
 }
 public static void main(String[] args) {
-// nothing to add here
-Scanner in = new Scanner(System.in);
-String[] toks ;
-String line;
-do {
-System.out.print("Enter a line or 'q' to quit: ");
-line = in.nextLine();
-if (!line.equals("q")) {
-line = addSpaces(line);
-toks = line.split("\\s");
- System.out.println(line+(arithmeticExpression(toks) ?" is ":" is not ") + " an expression.");
-}
-} while (!(line.equals("q")));
-}
+	// nothing to add here
+	Scanner in = new Scanner(System.in);
+	String[] toks ;
+	String line;
+	do {
+		System.out.print("Enter a line or 'q' to quit: ");
+		line = in.nextLine();
+		if (!line.equals("q")) {
+		line = addSpaces(line);
+		toks = line.split("\\s");
+		 System.out.println(line+(arithmeticExpression(toks) ?" is ":" is not ") + " an expression.");
+		}
+	} while (!(line.equals("q")));
+	}
 }
