@@ -28,7 +28,9 @@ static boolean digit(char c) {
 return false;
 }
 static boolean letter(char c) {
-return false;
+ 		
+		return ('a' <= c && c <= 'z' || 'A' <= c && c <= 'Z');
+
 }
 static boolean varChar(char c) {
 return false;
