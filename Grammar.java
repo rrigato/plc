@@ -25,7 +25,7 @@ static boolean value(String s) {
 return false;
 }
 static boolean digit(char c) {
-	return c >=49 && c <= 57;
+	return c >=48 && c <= 57;
 }
 static boolean letter(char c) {
  		
@@ -33,7 +33,7 @@ static boolean letter(char c) {
 
 }
 static boolean varChar(char c) {
-return false;
+return ( letter(c) || digit(c) );
 }
 static boolean variable(String s) {
 return false;
