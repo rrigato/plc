@@ -3,6 +3,10 @@ public class Expressions {
 static boolean ae(String [] tokens, int start, int end) {
 if (start > end) return false;
 if (start == end) return value(tokens[start]);
+int counter = 0;
+for (; counter <end; counter++)
+	return value(tokens[counter]);
+
 // fill in recursive cases
 return false;
 }
@@ -22,28 +26,32 @@ static boolean integer(String s) {
 return false;
 }
 static boolean value(String s) {
-return false;
+	if (s.length() ==1 && letter(s.charAt(0) ) ) return true;
+	return variable(s);
 }
 static boolean digit(char c) {
 	return c >=48 && c <= 57;
 }
 static boolean letter(char c) {
- 		
-		return ('a' <= c && c <= 'z' || 'A' <= c && c <= 'Z');
-
+	return ('a' <= c && c <= 'z' || 'A' <= c && c <= 'Z');
 }
 static boolean varChar(char c) {
-return ( letter(c) || digit(c) );
+return false;
 }
 static boolean variable(String s) {
-return false;
+
+	
+	if (letter(s.charAt(0)) && variableTail(s.substring(1)) ) return true;
+	return false;
 }
 static boolean variableTail(String s) {
-return false;
+	if (s.isEmpty()) return true;
+	if   (varChar(s.charAt(0)) && variableTail(s.substring(1))  ) return true;
+	return false;
+	
 }
-
 static String addSpaces(String s) {
-// nothing to add here
+	// nothing to add here
 	if (s.length() <= 1) return s;
 	String first = s.substring(0, 1);
 	char c = s.charAt(0), d = s.charAt(1);
@@ -52,18 +60,18 @@ static String addSpaces(String s) {
 	return first + addSpaces(s.substring(1));
 }
 public static void main(String[] args) {
-	// nothing to add here
-	Scanner in = new Scanner(System.in);
-	String[] toks ;
-	String line;
-	do {
-		System.out.print("Enter a line or 'q' to quit: ");
-		line = in.nextLine();
-		if (!line.equals("q")) {
-		line = addSpaces(line);
-		toks = line.split("\\s");
-		 System.out.println(line+(arithmeticExpression(toks) ?" is ":" is not ") + " an expression.");
+		// nothing to add here
+		Scanner in = new Scanner(System.in);
+		String[] toks ;
+		String line;
+		do {
+				System.out.print("Enter a line or 'q' to quit: ");
+				line = in.nextLine();
+				if (!line.equals("q")) {
+				line = addSpaces(line);
+				toks = line.split("\\s");
+				 System.out.println(line+(arithmeticExpression(toks) ?" is ":" is not ") + " an expression.");
+				}
+		} while (!(line.equals("q")));
 		}
-	} while (!(line.equals("q")));
-	}
 }
