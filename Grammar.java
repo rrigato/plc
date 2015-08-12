@@ -4,8 +4,9 @@ public class Expressions {
 static boolean ae(String [] tokens, int start, int end) {
 if (start > end) return false;
 if (start == end) return value(tokens[start]);
-if (tokens[start].length() ==2) return negativeInteger(tokens[start]);
-//for (int counter = 0; counter <end; counter++)
+if (value(tokens[start])) return (ae(tokens, start+1, end));
+//if (tokens[start].length() ==2) return negativeInteger(tokens[start]);
+//for (int counter = 0; counter <end; counter++)    tests how strings are stored
 //System.out.println(tokens[counter]);
 //if (negativeInteger(tokens[start])) return true;
 //if (ae(tokens, start+1, end)) return true;
@@ -24,8 +25,9 @@ static boolean arithmeticExpression(String [] tokens) {
 return ae(tokens,0,tokens.length-1);
 }
 static boolean operator(String s) {
-	//return (s.charAt(0)||s.compareTo("-") ||s.compareTo("*")||s.equals("/") || s.equals("%")) ;
-	return false;
+	char c = s.charAt(0);
+	return (c=='+'||c=='-' ||c=='/'||c=='*' || c=='%') ;
+
 }
 static boolean nonnegativeInteger(String s) {
 	if (s.length() ==1 && digit(s.charAt(0)) ) return true;
@@ -33,14 +35,16 @@ static boolean nonnegativeInteger(String s) {
 	return false;
 }
 static boolean negativeInteger(String s) {
-		if ((s.charAt(0) == '-')) return true;
+		char first = s.charAt(0);
+		if (( first == '-')) return true;
 return false;
 }
 static boolean integer(String s) {
-return false;
+		if (nonnegativeInteger(s) || negativeInteger(s) ) return true;
+		return false;
 }
 static boolean value(String s) {
-	if (s.length() ==1 && letter(s.charAt(0) ) ) return true;
+	if (integer(s) ) return true;
 	return variable(s);
 }
 static boolean digit(char c) {
