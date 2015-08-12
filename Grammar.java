@@ -4,8 +4,10 @@ static boolean ae(String [] tokens, int start, int end) {
 if (start > end) return false;
 if (start == end) return value(tokens[start]);
 int counter = 0;
+//return operator(tokens[0]);
 for (; counter <end; counter++)
 	return value(tokens[counter]);
+
 
 // fill in recursive cases
 return false;
@@ -14,10 +16,12 @@ static boolean arithmeticExpression(String [] tokens) {
 return ae(tokens,0,tokens.length-1);
 }
 static boolean operator(String s) {
-return false;
+	//return (s.charAt(0)||s.compareTo("-") ||s.compareTo("*")||s.equals("/") || s.equals("%")) ;
+	return false;
 }
 static boolean nonnegativeInteger(String s) {
-return false;
+	if (s.length() ==1 && digit(s.charAt(0)) ) return true;
+	return (digit(s.charAt(0)) && nonnegativeInteger(s.substring(1)) );
 }
 static boolean negativeInteger(String s) {
 return false;
