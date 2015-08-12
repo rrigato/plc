@@ -1,12 +1,20 @@
 import java.util.Scanner;
+
 public class Expressions {
 static boolean ae(String [] tokens, int start, int end) {
 if (start > end) return false;
 if (start == end) return value(tokens[start]);
-int counter = 0;
-//return operator(tokens[0]);
-for (; counter <end; counter++)
-	return value(tokens[counter]);
+if (tokens[start].length() ==2) return negativeInteger(tokens[start]);
+//for (int counter = 0; counter <end; counter++)
+//System.out.println(tokens[counter]);
+//if (negativeInteger(tokens[start])) return true;
+//if (ae(tokens, start+1, end)) return true;
+//int counter = 0;
+////return operator(tokens[0]);
+//for (; counter <end; counter++)
+//	{
+//		
+//	}
 
 
 // fill in recursive cases
@@ -21,9 +29,11 @@ static boolean operator(String s) {
 }
 static boolean nonnegativeInteger(String s) {
 	if (s.length() ==1 && digit(s.charAt(0)) ) return true;
-	return (digit(s.charAt(0)) && nonnegativeInteger(s.substring(1)) );
+	if (digit(s.charAt(0))) return nonnegativeInteger(s.substring(1));
+	return false;
 }
 static boolean negativeInteger(String s) {
+		if ((s.charAt(0) == '-')) return true;
 return false;
 }
 static boolean integer(String s) {
