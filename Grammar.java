@@ -5,11 +5,25 @@ static boolean ae(String [] tokens, int start, int end) {
 if (start > end) return false;
 if (start == end) return value(tokens[start]);
 if (value(tokens[start])) return (ae(tokens, start+1, end));
-char first = tokens[start].charAt(0), last =tokens[end].charAt(0);
+char first = tokens[start].charAt(0), last =0;
+int counter = start;
+int temp = counter;
+do
+{
+	if (tokens[counter].charAt(0) == ')') {
+		last = tokens[counter].charAt(0);
+		temp = counter;
+	}
+	counter++;
+}while(counter <=end);
 if (first=='-') return(ae(tokens, start+1, end));
 if (
-		(ae(tokens, start+1, end -1)) 
-		&& (  (first == '(' &&  last == ')' )) ) return true;
+		(ae(tokens, start+1, temp -1)) 
+		&& (  (first == '(' &&  last == ')' )) ){
+		if (temp == end)
+			return true;
+		return ae(tokens,temp+1,end);
+}
 if (start >0 && operator(tokens[start]))return ae(tokens, start+1, end); 
 
 // fill in recursive cases
