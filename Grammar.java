@@ -5,18 +5,12 @@ static boolean ae(String [] tokens, int start, int end) {
 if (start > end) return false;
 if (start == end) return value(tokens[start]);
 if (value(tokens[start])) return (ae(tokens, start+1, end));
-//if (tokens[start].length() ==2) return negativeInteger(tokens[start]);
-//for (int counter = 0; counter <end; counter++)    tests how strings are stored
-//System.out.println(tokens[counter]);
-//if (negativeInteger(tokens[start])) return true;
-//if (ae(tokens, start+1, end)) return true;
-//int counter = 0;
-////return operator(tokens[0]);
-//for (; counter <end; counter++)
-//	{
-//		
-//	}
-
+char first = tokens[start].charAt(0), last =tokens[end].charAt(0);
+if (first=='-') return(ae(tokens, start+1, end));
+if (
+		(ae(tokens, start+1, end -1)) 
+		&& (  (first == '(' &&  last == ')' )) ) return true;
+if (start >0 && operator(tokens[start]))return ae(tokens, start+1, end); 
 
 // fill in recursive cases
 return false;
