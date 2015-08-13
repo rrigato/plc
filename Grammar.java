@@ -3,7 +3,9 @@ import java.util.Scanner;
 public class Expressions {
 static boolean ae(String [] tokens, int start, int end) {
 if (start > end) return false;
+if (start >0 && letter(tokens[start].charAt(0)) && integer(tokens[start-1]) ) return false;
 if (start == end) return value(tokens[start]);
+
 if (value(tokens[start])) return (ae(tokens, start+1, end));
 char first = tokens[start].charAt(0), last =0;
 int counter = start;
@@ -62,7 +64,8 @@ static boolean letter(char c) {
 	return ('a' <= c && c <= 'z' || 'A' <= c && c <= 'Z');
 }
 static boolean varChar(char c) {
-return false;
+	if (letter(c) || digit(c)) return true;
+	return false;
 }
 static boolean variable(String s) {
 
@@ -95,6 +98,7 @@ public static void main(String[] args) {
 				line = in.nextLine();
 				if (!line.equals("q")) {
 				line = addSpaces(line);
+			//	System.out.println(line);
 				toks = line.split("\\s");
 				 System.out.println(line+(arithmeticExpression(toks) ?" is ":" is not ") + " an expression.");
 				}
