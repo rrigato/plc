@@ -40,7 +40,7 @@ else if (label == 6) goto L6;       \
 else if (label == 7) goto L7;       \
 else if (label == 8) goto L8;       \
 else if (label == 9) goto L9
-	    
+
 
 
 // Each AR object represents an activation record
@@ -56,7 +56,7 @@ public:
 	int returnAddress, param1, param2, param3, param4, localVar1, localVar2, localVar3, localVar4;
 
 	AR(int returnAddress = 0, int param1 = 0, int param2 = 0, int param3 = 0, int param4= 0) {
-		this->returnAddress = returnAddress; 
+		this->returnAddress = returnAddress;
 		this->param1 = param1;
 		this->param2 = param2;
 		this->param3 = param3;
@@ -72,7 +72,7 @@ void printStackHelper(stack<AR> t) {
 		AR a = t.top();
 		t.pop();
 		cout << a << endl;
-		printStackHelper(t); 
+		printStackHelper(t);
 	}
 
 }
@@ -130,7 +130,7 @@ menu:
 		if		(var1 == 1)	{ call_1(factorial, var2, 8); }
 		else if (var1 == 2) { call_1(fib,		var2, 8); }
 		else if (var1 == 3) { call_1(hanoi,		var2, 8); }
-		
+
 
 		L8: cout << "Return value is " << returnValue << endl << endl;
 	}
@@ -150,7 +150,7 @@ menu:
 	*/
 
 // factorial(j)
-factorial: 
+factorial:
 	printStack("begin factorial");
 	if (j == 0) {RETURN(1); }
 	else {
@@ -168,24 +168,30 @@ factorial:
 		int fib(int j) {
 			if (j == 0) return 0;
 			if (j == 1) return 1;
-			int var1 = fib(j-1);  
+			int var1 = fib(j-1);
 			int var2 = fib(j-2);
 			return var1 + var2;
 		}
-	
+
 	*/
 
 
-// fib(j) 
-fib: 
+// fib(j)
+fib:
 	printStack("begin fib");
+    if (j == 0)
+        {RETURN(0);}
+    else if (j ==1)
+        {RETURN(1);}
+    else{call_1(fib,j-1, 3);
 
-	L3: 
+	L3:var1 = returnValue;
+	call_1(fib,j-2,4);
 
-
-	L4: 
+	L4:var2 = returnValue;
 	printStack("end fib");
-	RETURN(var1 + var2);	
+	RETURN(var1 + var2);
+    }
 // end fib
 
 
@@ -195,7 +201,7 @@ fib:
 			hanoiHelper(j,1,3,2);
 			return;
 		}
-	
+
 	*/
 
 // hanoi(j)
@@ -203,7 +209,7 @@ hanoi:
 	printStack("Begin hanoi");
 	call_4(hanoiHelper,j,1,3,2,7);  //  1, 3 and 2 represent the three towers
 	L7: printStack("End hanoi");
-	RETURN(0);
+	RETURN(returnValue);
 // end hanoi
 
 
@@ -215,19 +221,22 @@ hanoi:
 			hanoiHelper(j - 1, n, m, k);
 			return;
 		}
-	
+
 	*/
 
 // hanoiHelper(j,k,m,n)
 hanoiHelper:
 	printStack("Begin hanoiHelper");
-	if (j <= 0) { RETURN(0); }
+	if (j <= 0) { RETURN(returnValue); }
 	else {
-		
-		L5: 
+        call_4(hanoiHelper,j-1,k,n,m,5);
+		L5:
+            returnValue++;
+		    cout << "Move disk " << j << " from tower " << k << " to tower " << m << endl;
+		    call_4(hanoiHelper,j-1,n,m,k,6);
 
-		L6:  
-		RETURN(0);
+		L6:
+		RETURN(returnValue);
 	}
 // end hanoiHelper
 
@@ -235,7 +244,7 @@ END: printStack("end of program");
 // we've exited simulated program.
 
 
-	
+
 
 
 L9:		// not used
@@ -243,4 +252,3 @@ return 0;
 
 
 }
-
